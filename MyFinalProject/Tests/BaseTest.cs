@@ -1,26 +1,21 @@
+using Core.Selenium;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 
 namespace MyFinalProject.Tests
 {
     public class BaseTest
     {
-        protected WebDriver driver;
+ 
+        //[SetUp]
 
-        [SetUp]
 
-        public void Setup()
+        [TearDown]
+        public void TearDown()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Navigate().GoToUrl("http://prestashop.qatestlab.com.ua/ru/");
+            Browser.Instance.CloseBrowser();
         }
-
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    driver.Quit();
-        //}
     }
 }

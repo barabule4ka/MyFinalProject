@@ -1,16 +1,18 @@
-﻿using OpenQA.Selenium;
+﻿using Core.Selenium;
+using OpenQA.Selenium;
 
 namespace MyFinalProject.BusinessObjects.PageObjects
 {
     public abstract class BasePage
     {
-        protected WebDriver driver;
+        protected IWebDriver driver;
 
-        public BasePage(WebDriver webDriver)
+        public BasePage()
         {
-            driver = webDriver;
+            driver = Browser.Instance.Driver;
         }
 
         public abstract BasePage OpenPage();
+
     }
 }

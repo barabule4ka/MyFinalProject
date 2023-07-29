@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyFinalProject.Models
 {
-    internal class UserModel
+    internal class DeliveryAddressModel
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
     }
 }
