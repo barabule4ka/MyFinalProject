@@ -26,7 +26,7 @@ namespace MyFinalProject.Models
             return new UserAuthModel()
             {
                 Email = AppConfig.RealUser.RealUserEmail,
-                Password = FakeTD.Internet.Password(4)
+                Password = FakeTD.Internet.Password(5) //не забыть заменить, чтоб кейс не падал
             };
 
         }

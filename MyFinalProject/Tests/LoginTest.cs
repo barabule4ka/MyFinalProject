@@ -1,6 +1,7 @@
 ﻿using MyFinalProject.BusinessObjects.PageObjects;
 using MyFinalProject.Models;
-using OpenQA.Selenium.DevTools.V112.Network;
+using NUnit.Allure.Attributes;
+using Allure.Net.Commons;
 
 namespace MyFinalProject.Tests
 {
@@ -9,7 +10,14 @@ namespace MyFinalProject.Tests
     internal class LoginTest : BaseTest
     {
 
-        [Test]
+        [Test(Description = "Login as unknown user")]
+        [AllureTag("First priority cases")]
+        [Description("Non-existent account")]
+        [AllureOwner("Barabule4ka")]
+        [AllureSuite("Prestashop")]
+        [AllureSubSuite("Login tests")]
+        [AllureTms("TFS_MTS")]
+        [AllureIssue("issue-1234")]
         public void LoginAsUnknownUser()
         {
             var expectedError = "Authentication failed";
@@ -20,11 +28,22 @@ namespace MyFinalProject.Tests
             page.TryToLogin(user);
             string text = page.FindErrorMessage(expectedError);
 
+            page.VerifyErrorMesage();
+
             Assert.That(text, Does.Contain(expectedError));
         }
 
-        
-        [Test]
+
+        [Test(Description = "Right email - wrong pass")]
+        [AllureSeverity(SeverityLevel.normal)]
+        [AllureTag("First priority cases")]
+        [Description("User logs in, but makes mistake in password")]
+        [AllureOwner("Barabule4ka")]
+        [AllureSuite("Prestashop")]
+        [AllureSubSuite("Login tests")]
+        [AllureTms("TFS_MTS")]
+        [AllureIssue("issue-123")]
+        [AllureLink("https://google.com")]
         public void LoginWithWrongPassword()
         {
             var expectedError = "Invalid password";
@@ -39,8 +58,16 @@ namespace MyFinalProject.Tests
             
         }
 
-        [Test]
-        public void LoginAsUser()
+        [Test(Description = "Login as real user")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureTag("Basic")]
+        [Description("Use real user")]
+        [AllureOwner("Barabule4ka")]
+        [AllureSuite("Prestashop")]
+        [AllureSubSuite("Smoke cases")]
+        [AllureTms("TFS_MTS")]
+        [AllureIssue("issue-12345")]
+        public void LoginAsRealUser()
         {
             var expectedUrl = "http://prestashop.qatestlab.com.ua/ru/my-account";
             
