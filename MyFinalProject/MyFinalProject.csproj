@@ -10,6 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BusinessObjects\**" />
+    <Compile Remove="Core\**" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="BusinessObjects\**" />
+    <EmbeddedResource Remove="Core\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="BusinessObjects\**" />
+    <None Remove="Core\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="allureConfig.json" />
     <None Remove="appsettings.json" />
     <None Remove="NLog.config" />
@@ -53,6 +65,11 @@
     <PackageReference Include="Selenium.Support" Version="4.10.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.10.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="115.0.5790.10200" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessObjects_ps\BusinessObjects.csproj" />
+    <ProjectReference Include="..\Core_ps\Core.csproj" />
   </ItemGroup>
 
 </Project>
