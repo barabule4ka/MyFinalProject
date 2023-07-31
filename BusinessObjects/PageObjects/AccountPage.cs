@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyFinalProject.BusinessObjects.PageObjects
 {
-    internal class AccountPage : BasePage
+    public class AccountPage : BasePage
     {
         public const string url = "http://prestashop.qatestlab.com.ua/ru/my-account";
 

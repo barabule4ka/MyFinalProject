@@ -4,7 +4,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace MyFinalProject.BusinessObjects.PageObjects
 {
-    internal class MainPage : BasePage
+    public class MainPage : BasePage
     {
 
         private By SigninMenuItem = By.CssSelector("a.login");

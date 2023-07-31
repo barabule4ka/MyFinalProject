@@ -6,7 +6,7 @@ using NLog;
 
 namespace MyFinalProject.BusinessObjects.PageObjects
 {
-    internal class LoginPage : BasePage
+    public class LoginPage : BasePage
     {
         private By UserEmailInput = By.Id("email");
         private By PasswordInput = By.Id("passwd");
