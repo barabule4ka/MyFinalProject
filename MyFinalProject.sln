@@ -5,9 +5,9 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFinalProject", "MyFinalProject\MyFinalProject.csproj", "{3C5864F0-37BF-4537-983E-730B4CA4067D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core_ps\Core.csproj", "{B347CA58-6EAD-4F11-B7FC-453B760FB975}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{B347CA58-6EAD-4F11-B7FC-453B760FB975}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObjects", "BusinessObjects_ps\BusinessObjects.csproj", "{59B3BCF7-ABE7-43D5-A9F5-6E6532CC1A36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObjects", "BusinessObjects\BusinessObjects.csproj", "{59B3BCF7-ABE7-43D5-A9F5-6E6532CC1A36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
