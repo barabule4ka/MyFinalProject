@@ -26,3 +26,10 @@ steps:
   displayName: 'Run tests'
   inputs:
     command: 'test' 
+
+schedules:
+- cron: '0 3 * * Mon-Fri'
+  displayName: M-F 3:00 AM (UTC) workdays
+  branches:
+    include:
+    - experiments
