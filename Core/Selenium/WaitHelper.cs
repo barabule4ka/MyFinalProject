@@ -1,9 +1,9 @@
 ﻿using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 
-namespace MyFinalProject.Core.Selenium
+namespace Core.Selenium
 {
-    internal class WaitHelper
+    public class WaitHelper
     {
         public static void WaitElement(IWebDriver driver, By by, int time = 7)
         {

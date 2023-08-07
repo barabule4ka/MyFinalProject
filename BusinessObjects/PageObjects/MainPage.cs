@@ -1,8 +1,11 @@
 ﻿using Core.Selenium;
+using NLog;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using MyFinalProject.BusinessObjects.PageObjects;
 
-namespace MyFinalProject.BusinessObjects.PageObjects
+namespace BusinessObjects.PageObjects
 {
     public class MainPage : BasePage
     {
@@ -13,13 +16,16 @@ namespace MyFinalProject.BusinessObjects.PageObjects
         private By ProductCardWithNavigateButtons = By.XPath("//li[@class='ajax_block_product col-xs-12 col-sm-4 col-md-3 first-in-line first-item-of-tablet-line first-item-of-mobile-line']");
         private By QuickViewButton = By.XPath("//*[@class='product-container']//a[@class='quick-view']");
 
-        public const string url = "http://prestashop.qatestlab.com.ua/ru/";
+        public const string url = "http://prestashop.qatestlab.com.ua/ru/";        
+
         public MainPage() : base()
         {
         }
-        public void GoToLogin()
+        [AllureStep]
+        public LoginPage GoToLoginPage()
         {
             driver.FindElement(SigninMenuItem).Click();
+            return new LoginPage();
         }
 
         public void DefineDefaultLanguage(string text)
@@ -59,8 +65,10 @@ namespace MyFinalProject.BusinessObjects.PageObjects
             return this;
         }
 
-        public override BasePage OpenPage()
+        public override MainPage OpenPage()
         {
+            logger.Info($"Navigate to url {url}");
+
             Browser.Instance.NavigateToUrl(url);
             return this;
         }

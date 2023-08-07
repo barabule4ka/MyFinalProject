@@ -1,7 +1,8 @@
-﻿using MyFinalProject.BusinessObjects.PageObjects;
+﻿using BusinessObjects.PageObjects;
 using MyFinalProject.Models;
 using NUnit.Allure.Attributes;
 using Allure.Net.Commons;
+using BusinessObjects.Models;
 
 namespace MyFinalProject.Tests
 {
@@ -26,11 +27,11 @@ namespace MyFinalProject.Tests
             var page = new LoginPage();
             page.OpenPage();
             page.TryToLogin(user);
-            string text = page.FindErrorMessage(expectedError);
+           // string text = page.FindErrorMessage();
 
             page.VerifyErrorMesage();
 
-            Assert.That(text, Does.Contain(expectedError));
+            Assert.That(page.FindErrorMessage(), Does.Contain(expectedError));
         }
 
 
@@ -52,9 +53,8 @@ namespace MyFinalProject.Tests
             var page = new LoginPage();
             page.OpenPage();
             page.TryToLogin(user);
-            string text = page.FindErrorMessage(expectedError);
 
-            Assert.That(text, Does.Contain(expectedError));
+            Assert.That(page.FindErrorMessage, Does.Contain(expectedError));
             
         }
 
@@ -70,14 +70,13 @@ namespace MyFinalProject.Tests
         public void LoginAsRealUser()
         {
             var expectedUrl = "http://prestashop.qatestlab.com.ua/ru/my-account";
-            
-            var page = new LoginPage()
+
+            var url =
+            new LoginPage()
             .OpenPage()
-            .TryToLoginAsUser();
-            string currentUrl = page.GetCurrentUrl();
+            .LoginAsRealUser().GetCurrentUrl();
 
-            Assert.That(currentUrl, Is.EqualTo(expectedUrl));
+            Assert.That(url, Is.EqualTo(expectedUrl));
         }
-
     }
 }

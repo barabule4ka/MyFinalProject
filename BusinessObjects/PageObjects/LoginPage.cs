@@ -1,21 +1,24 @@
 ﻿using Core.Selenium;
-using MyFinalProject.Models;
+using BusinessObjects.Models;
 using OpenQA.Selenium;
 using NUnit.Allure.Attributes;
-using NLog;
 
-namespace MyFinalProject.BusinessObjects.PageObjects
+namespace BusinessObjects.PageObjects
 {
     public class LoginPage : BasePage
     {
         private By UserEmailInput = By.Id("email");
         private By PasswordInput = By.Id("passwd");
         private By LoginButton = By.Id("SubmitLogin");
-        private By ErrorMessage = By.XPath("/html/body/div/div[2]/div/div[2]/div/div[1]/ol/li");
+        private By ErrorMessage = By.XPath("//*[@class='alert alert-danger'][.//li[contains(text(),' ')]]");
+        private By UserCreateEmail = By.Id("email_create");
+        private By CreateAccountButton = By.Id("SubmitCreate");
+        private By FirstNameInput = By.Id("customer_firstname");
+        private By LastNameInput = By.Id("customer_lastname");
+        private By RegisterButton = By.Id("submitAccount");
 
         public const string url = "http://prestashop.qatestlab.com.ua/ru/authentication?back=my-account";
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-
+        
         public LoginPage() : base()
         {
 
@@ -44,27 +47,31 @@ namespace MyFinalProject.BusinessObjects.PageObjects
         }
 
         [AllureStep("Find error message text")]
-        public string FindErrorMessage(string message)
+        public string FindErrorMessage()
         {
             string errorText = driver.FindElement(ErrorMessage).Text;
+            logger.Info($"Error message found: {errorText}");
 
-            switch (VerifyErrorMesage())
-            {
-                case true:
-                    {
-                        ClickSubmitButtonToLogin();
-                        return errorText;
+            return errorText;
+        }
 
-                    }
-                case false:
-                    {
-                        return errorText;
-                    }
-            }
+        [AllureStep("Try to create account")]
+        public AccountPage CreateNewAccount(UserModel user)
+        {
+            logger.Info($"Create new account for user: \nEmail: {user.Email}, \nPassword:{user.Password}, \nFirstName: {user.FirstName}, \nLastName:{user.LastName}");
+
+            driver.FindElement(UserCreateEmail).SendKeys(user.Email);
+            driver.FindElement(CreateAccountButton).Submit();
+            driver.FindElement(FirstNameInput).SendKeys(user.FirstName);
+            driver.FindElement(LastNameInput).SendKeys(user.LastName);
+            driver.FindElement(PasswordInput).SendKeys(user.Password);
+            driver.FindElement(RegisterButton).Submit();
+
+            return new AccountPage();   
         }
 
         [AllureStep("Try to login")]
-        public void TryToLogin(UserAuthModel user)
+        public void TryToLogin(UserModel user)
         {
             logger.Info($"Login as user {user}");
 
@@ -73,12 +80,12 @@ namespace MyFinalProject.BusinessObjects.PageObjects
             driver.FindElement(LoginButton).Click();
         }
 
-        public LoginPage TryToLoginAsUser()
+        public AccountPage LoginAsRealUser()
         {
             var user = UserBuilder.UseRealUser();
             TryToLogin(user);
 
-            return this;
+            return new AccountPage();
         }
 
         [AllureStep("Get url of current page")]
@@ -88,5 +95,7 @@ namespace MyFinalProject.BusinessObjects.PageObjects
 
             return driver.Url.ToString();
         }               
+
+
     }
 }
