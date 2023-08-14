@@ -95,7 +95,5 @@ namespace BusinessObjects.PageObjects
 
             return driver.Url.ToString();
         }               
-
-
     }
 }

@@ -4,6 +4,7 @@ using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using MyFinalProject.BusinessObjects.PageObjects;
+using NLog.Fluent;
 
 namespace BusinessObjects.PageObjects
 {
@@ -11,12 +12,13 @@ namespace BusinessObjects.PageObjects
     {
 
         private By SigninMenuItem = By.CssSelector("a.login");
-        private By DefaultLanguage = By.CssSelector("//div[@class='current'");
+        private By DefaultLanguage = By.XPath("//*[@id='languages-block-top']/div");
         private By ChangeLanguageDropDown = By.XPath("//div[@id='languages-block-top']");
+        private By SelectEnglish = By.XPath(".//a[@title='English (United States)']");
         private By ProductCardWithNavigateButtons = By.XPath("//li[@class='ajax_block_product col-xs-12 col-sm-4 col-md-3 first-in-line first-item-of-tablet-line first-item-of-mobile-line']");
         private By QuickViewButton = By.XPath("//*[@class='product-container']//a[@class='quick-view']");
 
-        public const string url = "http://prestashop.qatestlab.com.ua/ru/";        
+        public const string url = "http://prestashop.qatestlab.com.ua/ru/";
 
         public MainPage() : base()
         {
@@ -28,19 +30,21 @@ namespace BusinessObjects.PageObjects
             return new LoginPage();
         }
 
-        public void DefineDefaultLanguage(string text)
+        public MainPage SetNewLanguage()
         {
-            var language = driver.FindElement(DefaultLanguage).Text;
-        }
+            string currentLanguage = driver.FindElement(DefaultLanguage).Text;
 
-        public void SetNewLanguage()
-        {
-            driver.FindElement(ChangeLanguageDropDown).Click();
-        }
-
-        public void GoToChangeLanguage()
-        {
-            driver.FindElement(ChangeLanguageDropDown).Click();
+            if (currentLanguage.Contains("English"))
+            {
+                logger.Info("English has been already selected");
+            }
+            else
+            {
+                driver.FindElement(ChangeLanguageDropDown).Click();
+                driver.FindElement(SelectEnglish).Click();
+                logger.Info("English is selected like current language");
+            }
+            return this;
         }
 
         public MainPage ShowSmallCardWithButtons()
@@ -65,12 +69,21 @@ namespace BusinessObjects.PageObjects
             return this;
         }
 
+        [AllureStep("Open page")]
         public override MainPage OpenPage()
         {
             logger.Info($"Navigate to url {url}");
 
             Browser.Instance.NavigateToUrl(url);
             return this;
+        }
+
+        [AllureStep("Get url of current page")]
+        public string GetCurrentUrl()
+        {
+            logger.Info($"Get Current page Url {driver.Url}");
+
+            return driver.Url.ToString();
         }
     }
 }

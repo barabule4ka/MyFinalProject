@@ -74,7 +74,8 @@ namespace MyFinalProject.Tests
             var url =
             new LoginPage()
             .OpenPage()
-            .LoginAsRealUser().GetCurrentUrl();
+            .LoginAsRealUser()
+            .GetCurrentUrl();
 
             Assert.That(url, Is.EqualTo(expectedUrl));
         }
