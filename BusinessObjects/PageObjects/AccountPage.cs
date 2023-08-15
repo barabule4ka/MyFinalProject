@@ -15,9 +15,12 @@ namespace BusinessObjects.PageObjects
         {
         }
 
+        [AllureStep("Go Back To Main Page after login")]
         public MainPage GoBackToMainPage()
         {
             driver.FindElement(HomePageButton).Click();
+            logger.Info($"Go Back To Main Page");
+
             return new MainPage();
         }
 

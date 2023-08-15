@@ -17,27 +17,32 @@ namespace MyFinalProject.Tests
             .GoToLoginPage()
             .LoginAsRealUser()
             .GoBackToMainPage()
-            .ShowSmallCardWithButtons()
-            .OpenQuickViewCard();           
+            .OpenQuickViewCardForFirstProduct()
+            .AddProductToCartFromSmallCard()
+            .ShowInfoModalWindowSuccessandClose()
+            .FindProductInCartAndGoToCheckout()
+            .CheckAddressPresentsAndGoToShipping()
+            .SelectShippingType()
+            .AgreeTermsOfServiceAndGoToPayment()
+            .ChooseBankAsPaymentType()
+            .MakeOrder()
+            .EndOrderAndGoBackToMainPage();
 
-
-            //basic level of test
-    }
-        [Test]
-        public void MakeOrderFromCreatedUser()
-        {
-            var user = UserBuilder.CreateFakeUser();
-
-            new MainPage()
-            .OpenPage()
-            .GoToLoginPage()
-            .CreateNewAccount(user)
-            .GoBackToMainPage()
-            .ShowSmallCardWithButtons()
-            .OpenQuickViewCard();
-
-
-            //basic level of test
         }
+        //[Test]
+        //public void MakeOrderFromCreatedUser()
+        //{
+        //    var user = UserBuilder.CreateFakeUser();
+
+        //    new MainPage()
+        //    .OpenPage()
+        //    .GoToLoginPage()
+        //    .CreateNewAccount(user)
+        //    .GoBackToMainPage()
+        //    .OpenQuickViewCardForFirstProduct();
+
+
+        //    //basic level of test
+        //}
     }
 }

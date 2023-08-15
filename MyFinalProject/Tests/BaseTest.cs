@@ -28,9 +28,9 @@ namespace MyFinalProject.Tests
                 byte[] bytes = screenshot.AsByteArray;
                 allure.AddAttachment("Screenshot", "image/png", bytes);
             }
-            
-            Browser.Instance.CloseBrowser();
-            Browser.Instance.Driver.Quit();
+
+            //Browser.Instance.CloseBrowser();
+            //Browser.Instance.Driver.Quit();
         }
     }
 }

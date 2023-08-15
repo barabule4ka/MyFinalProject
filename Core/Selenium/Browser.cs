@@ -26,7 +26,8 @@ namespace Core.Selenium
             };
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(AppConfig.Browser.TimeOut);
-            driver.Manage().Window.Maximize();
+            //driver.Manage().Window.Maximize(); --headless не работает с этой настройкой
+            driver.Manage().Window.Size = new System.Drawing.Size(1400, 1000);
         }
 
         public void CloseBrowser()

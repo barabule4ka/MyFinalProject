@@ -2,9 +2,11 @@
 using NLog;
 using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using MyFinalProject.BusinessObjects.PageObjects;
+using BusinessObjects.PageObjects;
 using NLog.Fluent;
+using OpenQA.Selenium.DevTools.V112.Page;
+using OpenQA.Selenium.Support.Extensions;
+using System.Reflection.Metadata;
 
 namespace BusinessObjects.PageObjects
 {
@@ -15,8 +17,10 @@ namespace BusinessObjects.PageObjects
         private By DefaultLanguage = By.XPath("//*[@id='languages-block-top']/div");
         private By ChangeLanguageDropDown = By.XPath("//div[@id='languages-block-top']");
         private By SelectEnglish = By.XPath(".//a[@title='English (United States)']");
-        private By ProductCardWithNavigateButtons = By.XPath("//li[@class='ajax_block_product col-xs-12 col-sm-4 col-md-3 first-in-line first-item-of-tablet-line first-item-of-mobile-line']");
-        private By QuickViewButton = By.XPath("//*[@class='product-container']//a[@class='quick-view']");
+        private By QuickViewButton = By.ClassName("quick-view");
+        private By AddToCartButton = By.XPath("//p[@id='add_to_cart']/button/span");
+        private By MakeOrderButton = By.CssSelector("#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > a > span");
+
 
         public const string url = "http://prestashop.qatestlab.com.ua/ru/";
 
@@ -47,26 +51,42 @@ namespace BusinessObjects.PageObjects
             return this;
         }
 
-        public MainPage ShowSmallCardWithButtons()
+        [AllureStep("Open quick view of first product")]
+        public MainPage OpenQuickViewCardForFirstProduct()
         {
-            Actions action = new Actions(driver);
-            var productCardWithNavigateButtons = driver.FindElement(ProductCardWithNavigateButtons);
-            action.MoveToElement(productCardWithNavigateButtons).Perform();
-            return this;
-        }
-
-        public MainPage OpenQuickViewCard()
-        {
+            driver.ExecuteJavaScript("document.getElementsByClassName('ajax_block_product')[0].className = document.getElementsByClassName('ajax_block_product')[0].className + ' hovered'");
+            WaitHelper.WaitElement(driver, QuickViewButton);
             var quickViewButton = driver.FindElement(QuickViewButton);
             (quickViewButton).Click();
+
+            logger.Info("quick view of first product opened");
+
             return this;
         }
 
+        [AllureStep("Try to Add Product To Cart From Quick view")]
         public MainPage AddProductToCartFromSmallCard()
         {
-            var quickViewButton = driver.FindElement(QuickViewButton);
-            (quickViewButton).Click();
+            Thread.Sleep(5000);
+            IWebElement iframe = driver.FindElement(By.ClassName("fancybox-iframe"));
+            driver.SwitchTo().Frame(iframe);
+            driver.FindElement(AddToCartButton).Click();
+            driver.SwitchTo().DefaultContent();
+
+            logger.Info("Try to add product to cart");
+
             return this;
+        }
+
+        [AllureStep("Show modal - product was successfully added to cart")]
+        public CartPage ShowInfoModalWindowSuccessandClose()
+        {
+            Thread.Sleep(1000);
+            driver.FindElement(MakeOrderButton).Click();
+
+            logger.Info("product was successfully added to cart");
+
+            return new CartPage();
         }
 
         [AllureStep("Open page")]

@@ -1,6 +1,8 @@
 ﻿using Bogus;
 using Core.Configuration;
 using MyFinalProject.Models;
+using OpenQA.Selenium;
+using NUnit.Framework;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -47,6 +49,22 @@ namespace BusinessObjects.Models
                 FirstName = FakeTD.Name.FirstName(),
                 LastName = FakeTD.Name.LastName(),
                 Password = FakeTD.Internet.Password(8)
+            };
+        }
+
+        public static UserDeliveryAddressModel CreateDeliveryAddress()
+        {
+            return new UserDeliveryAddressModel()
+            {
+                FirstName = FakeTD.Name.FirstName(),
+                LastName = FakeTD.Name.LastName(),
+                Address = FakeTD.Address.StreetAddress(),
+                PostalCode = String.Join("", FakeTD.Random.Digits(5)),
+                City = FakeTD.Address.City(),
+                Country = "Украина",
+                HomePhone = FakeTD.Phone.PhoneNumber(),
+                State = "Украина",
+                Alias = FakeTD.Random.Word()
             };
         }
     }
