@@ -3,8 +3,6 @@ using Core.Selenium;
 using NUnit.Allure.Core;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
 
 namespace MyFinalProject.Tests
 {
@@ -30,9 +28,9 @@ namespace MyFinalProject.Tests
                 byte[] bytes = screenshot.AsByteArray;
                 allure.AddAttachment("Screenshot", "image/png", bytes);
             }
-            
-            Browser.Instance.CloseBrowser();
-            Browser.Instance.Driver.Quit();
+
+            //Browser.Instance.CloseBrowser();
+            //Browser.Instance.Driver.Quit();
         }
     }
 }

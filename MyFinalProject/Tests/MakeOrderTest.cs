@@ -1,30 +1,48 @@
-using MyFinalProject.BusinessObjects.PageObjects;
 using OpenQA.Selenium;
 using MyFinalProject.Models;
-
+using BusinessObjects.PageObjects;
+using BusinessObjects.Models;
 
 namespace MyFinalProject.Tests
 {
+    [TestFixture]
     internal class MakeOrderTest : BaseTest
     {
 
     [Test]
-    public void MakeOrder()
+    public void LoginAndMakeOrder()
     {
-            var main = new MainPage();
-            main.OpenPage();
-            main.GoToLogin();
+            new MainPage()
+            .OpenPage()
+            .GoToLoginPage()
+            .LoginAsRealUser()
+            .GoBackToMainPage()
+            .OpenQuickViewCardForFirstProduct()
+            .AddProductToCartFromSmallCard()
+            .ShowInfoModalWindowSuccessandClose()
+            .FindProductInCartAndGoToCheckout()
+            .CheckAddressPresentsAndGoToShipping()
+            .SelectShippingType()
+            .AgreeTermsOfServiceAndGoToPayment()
+            .ChooseBankAsPaymentType()
+            .MakeOrder()
+            .EndOrderAndGoBackToMainPage();
 
-            var login = new LoginPage();
-            login.TryToLoginAsUser();
-        
-            var account = new AccountPage();
-            account.GoBackToMainPage();
+        }
+        //[Test]
+        //public void MakeOrderFromCreatedUser()
+        //{
+        //    var user = UserBuilder.CreateFakeUser();
 
-            main.ShowSmallCardWithButtons();
-            main.OpenQuickViewCard();
+        //    new MainPage()
+        //    .OpenPage()
+        //    .GoToLoginPage()
+        //    .CreateNewAccount(user)
+        //    .GoBackToMainPage()
+        //    .OpenQuickViewCardForFirstProduct();
 
-            //basic level of test
+
+        //    //basic level of test
+        //}
     }
-}
 }
