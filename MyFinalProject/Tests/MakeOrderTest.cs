@@ -1,5 +1,3 @@
-using OpenQA.Selenium;
-using MyFinalProject.Models;
 using BusinessObjects.PageObjects;
 using BusinessObjects.Models;
 using NUnit.Allure.Attributes;
