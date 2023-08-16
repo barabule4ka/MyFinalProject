@@ -12,6 +12,7 @@ namespace MyFinalProject.Tests
         [AllureSuite("Prestashop")]
         [AllureTms("TFS_MTS")]
         [AllureIssue("issue-12348")]
+        [AllureSubSuite("Smoke cases")]
         public void ChangeLanguageAndCheckUrl()
         {
             var expectedUrl = "http://prestashop.qatestlab.com.ua/en/";

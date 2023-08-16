@@ -13,6 +13,7 @@ namespace MyFinalProject.Tests
         [AllureSubSuite("Negative tests")]
         [AllureTms("TFS_MTS")]
         [AllureIssue("issue-1234")]
+        [Category("Cart")]
 
         public void SeeEmptyCart()
         {

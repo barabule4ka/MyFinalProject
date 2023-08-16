@@ -23,7 +23,7 @@ namespace BusinessObjects.Models
             return new UserModel()
             {
                 Email = AppConfig.RealUser.RealUserEmail,
-                Password = FakeTD.Internet.Password(5) //не забыть заменить, чтоб кейс не падал
+                Password = FakeTD.Internet.Password(4) //не забыть заменить, чтоб кейс не падал
             };
 
         }

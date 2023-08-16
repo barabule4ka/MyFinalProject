@@ -20,6 +20,7 @@ namespace MyFinalProject.Tests
         [AllureSubSuite("Make order tests")]
         [AllureTms("TFS_MTS")]
         [AllureIssue("issue-12458")]
+        [Category("Order")]
         public void LoginAndMakeOrder()
     {
             new MainPage()
@@ -48,6 +49,7 @@ namespace MyFinalProject.Tests
         [AllureSubSuite("Make order tests")]
         [AllureTms("TFS_MTS")]
         [AllureIssue("issue-124580")]
+        [Category("Order")]
         public void MakeOrderFromCreatedUser()
         {
             var user = UserBuilder.CreateFakeUser();
