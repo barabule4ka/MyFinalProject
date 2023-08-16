@@ -7,7 +7,6 @@ namespace BusinessObjects.PageObjects
 {
     public class MainPage : BasePage
     {
-
         private By SigninMenuItem = By.CssSelector("a.login");
         private By DefaultLanguage = By.XPath("//*[@id='languages-block-top']/div");
         private By ChangeLanguageDropDown = By.XPath("//div[@id='languages-block-top']");
@@ -22,13 +21,15 @@ namespace BusinessObjects.PageObjects
         public MainPage() : base()
         {
         }
-        [AllureStep]
+
+        [AllureStep("Go To Login Page")]
         public LoginPage GoToLoginPage()
         {
             driver.FindElement(SigninMenuItem).Click();
             return new LoginPage();
         }
 
+        [AllureStep("Set New Language")]
         public MainPage SetNewLanguage()
         {
             string currentLanguage = driver.FindElement(DefaultLanguage).Text;

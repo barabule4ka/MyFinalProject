@@ -1,10 +1,7 @@
 ﻿using Core.Selenium;
 using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
-using BusinessObjects.Models;
 using MyFinalProject.Models;
-using Bogus.DataSets;
-using System.Diagnostics.Metrics;
 
 namespace BusinessObjects.PageObjects
 {
@@ -109,7 +106,7 @@ namespace BusinessObjects.PageObjects
             return true;
         }
 
-        [AllureStep("Try to create account")]
+        [AllureStep("Try to create address")]
         public CartPage CreateNewAddress(UserDeliveryAddressModel address)
         {
             logger.Info($"Create new address: "+
@@ -136,6 +133,5 @@ namespace BusinessObjects.PageObjects
 
             return this;
         }
-
     }
 }

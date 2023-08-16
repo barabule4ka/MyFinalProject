@@ -11,6 +11,7 @@ namespace BusinessObjects.PageObjects
         private By HomePageButton = By.CssSelector("#center_column > ul > li > a");
         private By LogoutLink = By.CssSelector("a.logout");
         private By AccountCreatedMessage = By.XPath("//*[@id='center_column']/p[1]");
+        private By GoToOrdersListLink = By.CssSelector("a[title='Orders']");
 
         public AccountPage() : base()
         {
@@ -47,8 +48,6 @@ namespace BusinessObjects.PageObjects
             logger.Info($"Make logout");
 
             return new LoginPage();
-
-
         }
 
         [AllureStep("Find message about successful account creation")]
@@ -59,6 +58,16 @@ namespace BusinessObjects.PageObjects
             logger.Info($"Message after account created: {driver.FindElement(AccountCreatedMessage).Text}");
 
             return true;
+        }
+
+        [AllureStep("Go To Order history Page")]
+        public OrderHistoryPage GoToOrderPage()
+        {
+            driver.FindElement(GoToOrdersListLink).Click();
+
+            logger.Info($"Order history Page opened");
+
+            return new OrderHistoryPage();
         }
     }
 }

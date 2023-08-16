@@ -1,5 +1,4 @@
 ﻿using BusinessObjects.PageObjects;
-using MyFinalProject.Models;
 using NUnit.Allure.Attributes;
 using Allure.Net.Commons;
 using BusinessObjects.Models;
@@ -10,7 +9,6 @@ namespace MyFinalProject.Tests
 
     internal class LoginTest : BaseTest
     {
-
         [Test(Description = "Login as unknown user")]
         [AllureTag("First priority cases")]
         [Description("Non-existent account")]
@@ -54,8 +52,7 @@ namespace MyFinalProject.Tests
             page.OpenPage();
             page.TryToLogin(user);
 
-            Assert.That(page.FindErrorMessage, Does.Contain(expectedError));
-            
+            Assert.That(page.FindErrorMessage, Does.Contain(expectedError));       
         }
 
         [Test(Description = "Login as real user")]
