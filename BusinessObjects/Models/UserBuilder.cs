@@ -2,11 +2,6 @@
 using Core.Configuration;
 using MyFinalProject.Models;
 using OpenQA.Selenium;
-using NUnit.Framework;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessObjects.Models
 {
@@ -61,9 +56,9 @@ namespace BusinessObjects.Models
                 Address = FakeTD.Address.StreetAddress(),
                 PostalCode = String.Join("", FakeTD.Random.Digits(5)),
                 City = FakeTD.Address.City(),
-                Country = "Украина",
+                Country = "",
                 HomePhone = FakeTD.Phone.PhoneNumber(),
-                State = "Украина",
+                State = "",
                 Alias = FakeTD.Random.Word()
             };
         }

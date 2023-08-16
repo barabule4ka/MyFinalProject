@@ -1,11 +1,6 @@
 ﻿using Core.Selenium;
 using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessObjects.PageObjects
 {
@@ -20,13 +15,13 @@ namespace BusinessObjects.PageObjects
         {
         }
 
-        [AllureStep("Make order")]
+        [AllureStep("Finish order")]
         public MainPage EndOrderAndGoBackToMainPage()
         {
             string text = driver.FindElement(OrderConfirmedMessage).Text;
             driver.FindElement(BackToOrdersLink).Click();
 
-            logger.Info($"Navigate to url {url}");
+            logger.Info($"See message: {text}. Return to main page");
 
             return new MainPage();
         }

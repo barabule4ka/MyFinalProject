@@ -7,9 +7,10 @@ namespace BusinessObjects.PageObjects
     public class AccountPage : BasePage
     {
         public const string url = "http://prestashop.qatestlab.com.ua/ru/my-account";
-       // public string urlAccountCreation = "http://prestashop.qatestlab.com.ua/ru/authentication?back=my-account#account-creation";
-
+      
         private By HomePageButton = By.CssSelector("#center_column > ul > li > a");
+        private By LogoutLink = By.CssSelector("a.logout");
+        private By AccountCreatedMessage = By.XPath("//*[@id='center_column']/p[1]");
 
         public AccountPage() : base()
         {
@@ -36,6 +37,28 @@ namespace BusinessObjects.PageObjects
             logger.Info($"Get Current page Url {driver.Url}");
 
             return driver.Url.ToString();
+        }
+
+        [AllureStep("Logoff")]
+        public LoginPage LogOut()
+        {
+            driver.FindElement(LogoutLink).Click();
+            
+            logger.Info($"Make logout");
+
+            return new LoginPage();
+
+
+        }
+
+        [AllureStep("Find message about successful account creation")]
+        public bool AccountCreated()
+        {
+            driver.FindElement(AccountCreatedMessage);
+
+            logger.Info($"Message after account created: {driver.FindElement(AccountCreatedMessage).Text}");
+
+            return true;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MyFinalProject.Tests
         [Description("Non-existent account")]
         [AllureOwner("Barabule4ka")]
         [AllureSuite("Prestashop")]
-        [AllureSubSuite("Login tests")]
+        [AllureSubSuite("Negative tests")]
         [AllureTms("TFS_MTS")]
         [AllureIssue("issue-1234")]
         public void LoginAsUnknownUser()
@@ -28,8 +28,6 @@ namespace MyFinalProject.Tests
             page.OpenPage();
             page.TryToLogin(user);
            // string text = page.FindErrorMessage();
-
-            page.VerifyErrorMesage();
 
             Assert.That(page.FindErrorMessage(), Does.Contain(expectedError));
         }

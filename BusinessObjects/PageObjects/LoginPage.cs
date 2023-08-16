@@ -21,7 +21,6 @@ namespace BusinessObjects.PageObjects
         
         public LoginPage() : base()
         {
-
         }
 
         [AllureStep("Open login page")]

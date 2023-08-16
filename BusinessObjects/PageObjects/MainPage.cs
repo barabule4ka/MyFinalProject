@@ -1,12 +1,7 @@
 ﻿using Core.Selenium;
-using NLog;
 using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
-using BusinessObjects.PageObjects;
-using NLog.Fluent;
-using OpenQA.Selenium.DevTools.V112.Page;
 using OpenQA.Selenium.Support.Extensions;
-using System.Reflection.Metadata;
 
 namespace BusinessObjects.PageObjects
 {
