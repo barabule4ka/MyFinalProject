@@ -16,9 +16,10 @@ namespace MyFinalProject.Tests
         [Description("Non-existent account")]
         [AllureOwner("Barabule4ka")]
         [AllureSuite("Prestashop")]
-        [AllureSubSuite("Login tests")]
+        [AllureSubSuite("Negative tests")]
         [AllureTms("TFS_MTS")]
         [AllureIssue("issue-1234")]
+        [Category("Login")]
         public void LoginAsUnknownUser()
         {
             var expectedError = "Authentication failed";
@@ -28,8 +29,6 @@ namespace MyFinalProject.Tests
             page.OpenPage();
             page.TryToLogin(user);
            // string text = page.FindErrorMessage();
-
-            page.VerifyErrorMesage();
 
             Assert.That(page.FindErrorMessage(), Does.Contain(expectedError));
         }
@@ -45,6 +44,7 @@ namespace MyFinalProject.Tests
         [AllureTms("TFS_MTS")]
         [AllureIssue("issue-123")]
         [AllureLink("https://google.com")]
+        [Category("Login")]
         public void LoginWithWrongPassword()
         {
             var expectedError = "Invalid password";
@@ -67,6 +67,7 @@ namespace MyFinalProject.Tests
         [AllureSubSuite("Smoke cases")]
         [AllureTms("TFS_MTS")]
         [AllureIssue("issue-12345")]
+        [Category("Login")]
         public void LoginAsRealUser()
         {
             var expectedUrl = "http://prestashop.qatestlab.com.ua/ru/my-account";

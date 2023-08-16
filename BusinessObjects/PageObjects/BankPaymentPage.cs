@@ -19,12 +19,12 @@ namespace BusinessObjects.PageObjects
         {
         }
 
-        [AllureStep("Make order")]
+        [AllureStep("Confirm payment type")]
         public OrderConfirmedPage MakeOrder()
         {
             driver.FindElement(SubmitOrderButton).Click();
 
-            logger.Info($"Navigate to url {url}");
+            logger.Info($"Confirm payment type and finish order");
 
             return new OrderConfirmedPage();
         }

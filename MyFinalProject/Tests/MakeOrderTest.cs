@@ -2,6 +2,8 @@ using OpenQA.Selenium;
 using MyFinalProject.Models;
 using BusinessObjects.PageObjects;
 using BusinessObjects.Models;
+using NUnit.Allure.Attributes;
+using Allure.Net.Commons;
 
 namespace MyFinalProject.Tests
 {
@@ -9,8 +11,17 @@ namespace MyFinalProject.Tests
     internal class MakeOrderTest : BaseTest
     {
 
-    [Test]
-    public void LoginAndMakeOrder()
+        [Test(Description = "Login and make order")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureTag("First priority cases")]
+        [Description("Real test-user account")]
+        [AllureOwner("Barabule4ka")]
+        [AllureSuite("Prestashop")]
+        [AllureSubSuite("Make order tests")]
+        [AllureTms("TFS_MTS")]
+        [AllureIssue("issue-12458")]
+        [Category("Order")]
+        public void LoginAndMakeOrder()
     {
             new MainPage()
             .OpenPage()
@@ -27,22 +38,39 @@ namespace MyFinalProject.Tests
             .ChooseBankAsPaymentType()
             .MakeOrder()
             .EndOrderAndGoBackToMainPage();
-
         }
-        //[Test]
-        //public void MakeOrderFromCreatedUser()
-        //{
-        //    var user = UserBuilder.CreateFakeUser();
 
-        //    new MainPage()
-        //    .OpenPage()
-        //    .GoToLoginPage()
-        //    .CreateNewAccount(user)
-        //    .GoBackToMainPage()
-        //    .OpenQuickViewCardForFirstProduct();
+        [Test(Description = "Create user and make order")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureTag("First priority cases")]
+        [Description("New test-user account")]
+        [AllureOwner("Barabule4ka")]
+        [AllureSuite("Prestashop")]
+        [AllureSubSuite("Make order tests")]
+        [AllureTms("TFS_MTS")]
+        [AllureIssue("issue-124580")]
+        [Category("Order")]
+        public void MakeOrderFromCreatedUser()
+        {
+            var user = UserBuilder.CreateFakeUser();
+            var address = UserBuilder.CreateDeliveryAddress();
 
-
-        //    //basic level of test
-        //}
+            new MainPage()
+            .OpenPage()
+            .GoToLoginPage()
+            .CreateNewAccount(user)
+            .GoBackToMainPage()
+            .OpenQuickViewCardForFirstProduct()
+            .AddProductToCartFromSmallCard()
+            .ShowInfoModalWindowSuccessandClose()
+            .FindProductInCartAndGoToCheckout()
+            .CreateNewAddress(address)
+            .CheckAddressPresentsAndGoToShipping()
+            .SelectShippingType()
+            .AgreeTermsOfServiceAndGoToPayment()
+            .ChooseBankAsPaymentType()
+            .MakeOrder()
+            .EndOrderAndGoBackToMainPage();
+        }
     }
 }
