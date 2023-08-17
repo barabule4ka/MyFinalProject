@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+	<TestRunParameters>
+		<Parameter name="Headless" value="false"/>
+		<Parameter name="BrowseType" value="Chrome"/>
+		<Parameter name="ImplicityWait" value="10"/>
+
+		<Parameter name="RealUserEmail" value="qweqwe@qweqwe.ru"/>
+		<Parameter name="RealUserPassword" value="qweQwe"/>
+
+	</TestRunParameters>
+</RunSettings>
+

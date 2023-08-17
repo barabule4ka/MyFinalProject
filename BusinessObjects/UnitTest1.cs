@@ -1,4 +1,4 @@
-namespace MyFinalProject
+namespace BusinessObjects_ps
 {
     public class Tests
     {
