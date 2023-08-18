@@ -26,7 +26,6 @@ namespace MyFinalProject.Tests
             var page = new LoginPage();
             page.OpenPage();
             page.TryToLogin(user);
-           // string text = page.FindErrorMessage();
 
             Assert.That(page.FindErrorMessage(), Does.Contain(expectedError));
         }
@@ -67,15 +66,13 @@ namespace MyFinalProject.Tests
         [Category("Login")]
         public void LoginAsRealUser()
         {
-            var expectedUrl = "http://prestashop.qatestlab.com.ua/ru/my-account";
-
             var url =
             new LoginPage()
             .OpenPage()
             .LoginAsRealUser()
             .GetCurrentUrl();
 
-            Assert.That(url, Is.EqualTo(expectedUrl));
+            Assert.That(url, Is.EqualTo(AccountPage.url));
         }
     }
 }
