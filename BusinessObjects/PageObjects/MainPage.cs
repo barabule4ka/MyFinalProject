@@ -14,6 +14,7 @@ namespace BusinessObjects.PageObjects
         private By QuickViewButton = By.ClassName("quick-view");
         private By AddToCartButton = By.XPath("//p[@id='add_to_cart']/button/span");
         private By MakeOrderButton = By.CssSelector("#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > a > span");
+        private By EmptyCartNotification = By.XPath("//span[@class='ajax_cart_no_product']");
 
 
         public const string url = "http://prestashop.qatestlab.com.ua/ru/";
@@ -22,9 +23,17 @@ namespace BusinessObjects.PageObjects
         {
         }
 
+        public string GetEmptyCartNotification()
+        {
+                logger.Info($"Number of products in cart = {driver.FindElement(EmptyCartNotification).Text}");
+                return driver.FindElement(EmptyCartNotification).Text;
+        }
+
         [AllureStep("Go To Login Page")]
         public LoginPage GoToLoginPage()
         {
+            logger.Info("Go To Login Page");
+
             driver.FindElement(SigninMenuItem).Click();
             return new LoginPage();
         }

@@ -21,11 +21,12 @@ namespace MyFinalProject.Tests
         {
             var user = UserBuilder.CreateFakeUser();
 
-            new LoginPage()
+            var page = new LoginPage()
                 .OpenPage()
                 .CreateNewAccount(user)
-                .GoToOrderPage()
-                .VerifyEmptyOrdersHistoryMessage();
+                .GoToOrderPage();
+
+                Assert.That(page.VerifyEmptyOrdersHistoryMessage(), Is.True);
         }
 
         [Test(Description = "Login and check orders history for real user")]
@@ -40,11 +41,12 @@ namespace MyFinalProject.Tests
         [Category("Order")]
         public void GoToRealUserOrdersHistory()
         {
-            new LoginPage()
+            var page = new LoginPage()
                 .OpenPage()
                 .LoginAsRealUser()
-                .GoToOrderPage()
-                .VerifyExistingOrdersHistoryTable();
+                .GoToOrderPage();
+
+            Assert.That(page.VerifyExistingOrdersHistoryTable(), Is.True);
         }
     }
 }

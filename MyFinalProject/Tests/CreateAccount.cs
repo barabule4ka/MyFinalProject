@@ -19,10 +19,11 @@ namespace MyFinalProject.Tests
         {
             var user = UserBuilder.CreateFakeUser();
 
-            new LoginPage()
+            var page = new LoginPage()
                 .OpenPage()
-                .CreateNewAccount(user)
-                .AccountCreated();
+                .CreateNewAccount(user);
+
+                Assert.That(page.AccountCreated());
         }
     }
 }

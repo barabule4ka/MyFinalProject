@@ -2,6 +2,7 @@
 using BusinessObjects.Models;
 using OpenQA.Selenium;
 using NUnit.Allure.Attributes;
+using NUnit.Framework;
 
 namespace BusinessObjects.PageObjects
 {
@@ -36,13 +37,6 @@ namespace BusinessObjects.PageObjects
         public void ClickSubmitButtonToLogin()
         {
             driver.FindElement(LoginButton).Submit();
-        }
-
-        [AllureStep("error message exists")]
-        public bool VerifyErrorMesage()
-        {
-            driver.FindElement(ErrorMessage);
-            return false;
         }
 
         [AllureStep("Find error message text")]
