@@ -2,6 +2,8 @@ using BusinessObjects.PageObjects;
 using BusinessObjects.Models;
 using NUnit.Allure.Attributes;
 using Allure.Net.Commons;
+using Core.Selenium;
+using OpenQA.Selenium;
 
 namespace MyFinalProject.Tests
 {
@@ -21,7 +23,9 @@ namespace MyFinalProject.Tests
         [Category("Order")]
         public void LoginAndMakeOrder()
     {
-            new MainPage()
+            string expectedNumberOfProductsInCart = "(пусто)";
+
+            var page = new MainPage()
             .OpenPage()
             .GoToLoginPage()
             .LoginAsRealUser()
@@ -36,6 +40,8 @@ namespace MyFinalProject.Tests
             .ChooseBankAsPaymentType()
             .MakeOrder()
             .EndOrderAndGoBackToMainPage();
+
+            Assert.That(page.GetEmptyCartNotification, Is.EqualTo(expectedNumberOfProductsInCart));
         }
 
         [Test(Description = "Create user and make order")]
@@ -52,8 +58,9 @@ namespace MyFinalProject.Tests
         {
             var user = UserBuilder.CreateFakeUser();
             var address = UserBuilder.CreateDeliveryAddress();
+            var expectedUrl = "http://prestashop.qatestlab.com.ua/ru/";
 
-            new MainPage()
+            var page = new MainPage()
             .OpenPage()
             .GoToLoginPage()
             .CreateNewAccount(user)
@@ -69,6 +76,10 @@ namespace MyFinalProject.Tests
             .ChooseBankAsPaymentType()
             .MakeOrder()
             .EndOrderAndGoBackToMainPage();
+
+            var url = page.GetCurrentUrl();
+
+            Assert.That(url, Is.EqualTo(expectedUrl));
         }
     }
 }
