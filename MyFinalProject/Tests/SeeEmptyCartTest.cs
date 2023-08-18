@@ -17,9 +17,10 @@ namespace MyFinalProject.Tests
 
         public void SeeEmptyCart()
         {
-            new CartPage()
-                .OpenPage()
-                .AssertEmptyCart();
+            var page = new CartPage()
+                .OpenPage();
+
+            Assert.IsNotNull(page.AssertEmptyCart());
         }
     }
 }
